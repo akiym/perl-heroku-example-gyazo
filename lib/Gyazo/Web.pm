@@ -11,14 +11,6 @@ sub dispatch {
     return (Gyazo::Web::Dispatcher->dispatch($_[0]) or die "response is not generated");
 }
 
-# load plugins
-__PACKAGE__->load_plugins(
-    'Web::FillInFormLite',
-    'Web::CSRFDefender' => {
-        post_only => 1,
-    },
-);
-
 # setup view
 use Gyazo::Web::View;
 {
@@ -39,14 +31,6 @@ __PACKAGE__->add_trigger(
 
         # Cache control.
         $res->header( 'Cache-Control' => 'private' );
-    },
-);
-
-__PACKAGE__->add_trigger(
-    BEFORE_DISPATCH => sub {
-        my ( $c ) = @_;
-        # ...
-        return;
     },
 );
 
