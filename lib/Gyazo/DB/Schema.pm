@@ -8,9 +8,9 @@ use Teng::Schema::Declare;
 base_row_class 'Gyazo::DB::Row';
 
 table {
-    name 'member';
+    name 'image';
     pk 'id';
-    columns qw(id name);
+    columns qw(id filename src ctime);
 };
 
 1;
