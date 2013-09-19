@@ -31,6 +31,19 @@ post '/upload' => sub {
     return $c->create_response(200, [], [$url]);
 };
 
+get '/history' => sub {
+    my ($c) = @_;
+    my @images = $c->db->search('image',
+        {},
+        {
+            order_by => {ctime => 'DESC'}, # 降順
+        }
+    );
+    return $c->render('history.tt' => {
+        images => \@images,
+    });
+};
+
 get '/{filename:.+\.png}' => sub {
     my ($c, $args) = @_;
     my $image = $c->db->single('image', {

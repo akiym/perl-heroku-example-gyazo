@@ -1,0 +1,13 @@
+[% WRAPPER 'include/layout.tt' %]
+
+<div class="row">
+[%- FOR image IN images %]
+    <div class="col-lg-4">
+        <a href="[% uri_for('/' ~ image.filename) %]">
+            <img src="[% uri_for('/' ~ image.filename) %]" width="360" height="360" />
+        </a>
+    </div>
+[%- END %]
+</div>
+
+[% END %]
