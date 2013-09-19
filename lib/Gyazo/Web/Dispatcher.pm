@@ -31,4 +31,20 @@ post '/upload' => sub {
     return $c->create_response(200, [], [$url]);
 };
 
+get '/{filename:.+\.png}' => sub {
+    my ($c, $args) = @_;
+    my $image = $c->db->single('image', {
+        filename => $args->{filename},
+    });
+    if ($image) {
+        return $c->create_response(
+            200,
+            ['Content-Type' => 'image/png'],
+            [$image->src]
+        );
+    } else {
+        return $c->res_404;
+    }
+};
+
 1;
